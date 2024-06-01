@@ -37,7 +37,7 @@ print(inspetor_engine.default_schema_name)
 
 #adicionando itens no Bd
 with Session(engine) as session:
-    marcio = User (
+ """ marcio = User (
     name = 'Marcio Guilherme',
     address = [Address(email = "marcioguilherme@gmail.com")]
     )
@@ -50,7 +50,7 @@ with Session(engine) as session:
 
     #Enviando para o banco de dados
     session.add_all([marcio,lucas,patrick])
-    session.commit()
+    session.commit() """
 #--------------------------------------------------------------------------------------------------------
 #Consultando itens 
 stat = select(User).where(User.name.in_(["Lucas",'Marcio Guilherme']))
