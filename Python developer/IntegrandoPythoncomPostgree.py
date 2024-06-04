@@ -83,7 +83,11 @@ base.metadata.create_all(engine)
 # Adicionando itens no Banco de dados Postgreesql
 
 with Session(engine) as session:
-   """ marcio = User(
+   """ 
+    #Depois da primeira iserção, deixar como comentario senão a toda exexução ira
+    adicionar novamente os user
+
+    marcio = User(
     name = 'Marcio Guilherme',
     cpf = '489.652.658-88',
     conta = [Bank(tipo= 'Corrente', num= '2651265', saldo = 554.86)]
