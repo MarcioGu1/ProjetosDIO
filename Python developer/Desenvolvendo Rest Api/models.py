@@ -16,6 +16,24 @@ class Pessoas(base):
     def __repr__(self):
         return f'<nome = {self.nome}  idade = {self.idade} >'
 
+class Usuarios(base):
+    __tablename__= 'usuarios'
+    id = Column(Integer, primary_key=True)
+    login = Column(String(20),unique=True)
+    senha = Column(String(20))
+
+    def __repr__(self):
+        return f"<Usuário: {self.login}>"
+    def save(self):
+         with Session(engine) as session:
+             session.add(self)
+             session.commit()
+    def delete(self):
+         with Session(engine) as session:
+             # Deleta a pessoa
+            session.delete(self)
+            session.commit()
+
 def init_db():
     #criando as classes como tabelas no banco de dados
     base.metadata.create_all(engine)
