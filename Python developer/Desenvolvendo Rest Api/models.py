@@ -92,6 +92,7 @@ def consultar():
         pass
     else:
         print("Voce digitou uma opção invalida")
+
 def atualizar(user_id,novo_nome = None,nova_idade=None):
     with Session(engine) as session:
         pessoa = session.query(Pessoas).filter(Pessoas.id == user_id).one_or_none()
@@ -128,9 +129,20 @@ def deletar():
         except Exception:
             print("Erro: Nenhuma pessoa encontrada com o ID fornecido.")
 
+def insere_usuario():
+  login = input("digite seu login: ")
+  senha = input ("Digite sua senha : ")
+  usuario = Usuarios(login=login,senha=senha)
+  usuario.save()
+
+
+def consulta_users():
+    with Session(engine) as session:
+        usuarios = session.query.all()
+        print(usuarios)
 
 if __name__ == '__main__':
     init_db()
     #inserir()
     consultar()
- 
+    consulta_users()

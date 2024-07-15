@@ -1,17 +1,37 @@
 from flask import *
 from flask_restful import *
-from models import Pessoas
+from flask_httpauth import *
+from models import Pessoas,Usuarios
 from sqlalchemy import *
 from sqlalchemy.orm import *
 from sqlalchemy.exc import SQLAlchemyError
 
+auth = HTTPBasicAuth()
 app = Flask(__name__)
 api = Api(app)
 
 # conexão com banco de dados
 engine = create_engine('postgresql+psycopg2://postgres:9aH&11a6@localhost:5432/postgres')
 
+USUARIOS = {
+    "marcio":"1234",
+    "lucas":"3456"
+    }
+
+# Função de verificação de senha para autenticação básica
+@auth.verify_password
+def verify_password(login, senha):
+    with Session(engine) as session:
+        # Verifica se login e senha foram fornecidos
+        if not (login and senha):
+            return False
+        # Verifica se o usuário e senha existem no banco de dados
+        usuario = session.query(Usuarios).filter_by(login=login, senha=senha).first()
+        return usuario is not None
+        
+        return 
 class Pessoa(Resource):
+    @auth.login_required
     def get (self,nome):
         try:
             with Session(engine) as session:
@@ -55,6 +75,7 @@ class Pessoa(Resource):
             return {f"status": "sucesso", "mensagem":menssagem}
         
 class ListaPessoas(Resource):
+    @auth.login_required
     def get(self):
         with Session(engine) as session:
             pessoa = session.query(Pessoas).all()
