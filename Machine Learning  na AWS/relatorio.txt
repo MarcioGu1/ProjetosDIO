@@ -1,0 +1,44 @@
+O relatório abaixo foi possivel graças ao uso da ferramenta low-code da AWS chamada Canvas
+
+
+
+
+
+Relatório de Análise Preditiva do Crescimento do Estoque
+1. Introdução
+Este relatório apresenta uma análise preditiva detalhada sobre o crescimento do estoque, utilizando dados históricos e técnicas avançadas de modelagem preditiva. A análise inclui os seguintes índices de desempenho do modelo:
+
+Avg.wQL (Average weighted Quantile Loss)
+MAPE (Mean Absolute Percentage Error)
+WAPE (Weighted Absolute Percentage Error)
+RMSE (Root Mean Squared Error)
+MASE (Mean Absolute Scaled Error)
+Além disso, consideramos a correlação entre o preço e a quantidade de estoque.
+
+2. Resultados dos Índices
+1. Avg.wQL (0,06)
+
+Interpretação: Um valor de Avg.wQL de 0,06 indica que o modelo tem uma boa precisão na previsão dos quantis, o que significa que os intervalos de confiança das previsões estão bem ajustados. Esse baixo valor sugere que o modelo consegue capturar bem a incerteza das previsões.
+2. MAPE (0,149 ou 14,9%)
+
+Interpretação: O MAPE de 14,9% significa que, em média, as previsões do modelo estão erradas por 14,9% em relação aos valores reais. Este nível de erro é razoável e indica que o modelo possui uma precisão moderada.
+3. WAPE (0,103 ou 10,3%)
+
+Interpretação: O WAPE de 10,3% demonstra que o modelo apresenta um erro absoluto médio ponderado de 10,3% em relação aos valores reais. Isso confirma a boa performance do modelo, especialmente em contextos onde algumas quantidades são mais significativas que outras.
+4. RMSE (5,977)
+
+Interpretação: O RMSE de 5,977 mostra que o desvio padrão das previsões é de aproximadamente 6 unidades. Isso indica a magnitude média dos erros de previsão. Valores mais baixos são preferíveis, mas este valor sugere que há espaço para melhorar a precisão.
+5. MASE (0,310)
+
+Interpretação: Um MASE de 0,310 indica que o modelo é aproximadamente 69% mais preciso do que um modelo de referência, como a média histórica ou um modelo de persistência. Valores menores que 1 indicam uma boa performance do modelo.
+3. Correlação entre Preço e Quantidade de Estoque
+Correlação de 9,14%
+
+Interpretação: A correlação de 9,14% entre o preço e a quantidade de estoque é bastante baixa. Isso indica que o preço não tem uma relação linear forte com a quantidade de estoque. Portanto, outros fatores além do preço devem estar influenciando mais significativamente o estoque.
+4. Conclusão
+A análise preditiva realizada apresenta resultados promissores, com índices que indicam uma boa performance do modelo de previsão do crescimento do estoque. Em resumo:
+
+Precisão e Confiabilidade: Os baixos valores de Avg.wQL e MASE mostram que o modelo é confiável e precisa na previsão dos quantis e comparado a modelos de referência.
+Erros de Previsão: MAPE e WAPE indicam uma precisão moderada, enquanto o RMSE sugere que há espaço para melhorias na redução dos erros.
+Influência do Preço: A baixa correlação entre o preço e a quantidade de estoque sugere que o preço não é um fator determinante no comportamento do estoque.
+Essas informações podem ser usadas para melhorar estratégias de gestão de estoque, ajustar preços e prever melhor as necessidades futuras de reposição.
