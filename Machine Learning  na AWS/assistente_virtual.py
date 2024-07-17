@@ -15,7 +15,7 @@ import time
 
 class Assistent:
     def __init__(self):
-        self.falar("oi")
+        self.falar("bom dia senhorini")
 
     # Função para o Friday  falar
     def falar(self,frase):
@@ -50,49 +50,78 @@ class Assistent:
             
             if "navegador" in frase:
                 os.system("start Chrome.exe")
-                self.falar("Abrindo o google,mais alguma coisa ?")
-            
-            elif "Gamer" in frase :
-                self.falar("senhor qual jogo você deja jogar agora")
-                try:
-                    self.ouvir_microfone()
+                #Habilita o microfone
+                microfone = sr.Recognizer()
+                #Usando o microfone
+                with sr.Microphone() as source:
+                    #Chama um algoritimo de redução de ruidos
+                    microfone.adjust_for_ambient_noise(source)
+                    self.falar("Abrindo o google,mais alguma coisa ?")
+                    #Armazena o comando em variavel
+                    audio = microfone.listen(source)
+                #passa o comando para o algoritimo interpretar
+                frase = microfone.recognize_google(audio,language = "pt-BR")
+                if "sim" in frase :
+                     #Habilita o microfone
+                    microfone = sr.Recognizer()
+                    #Usando o microfone
+                    with sr.Microphone() as source:
+                        #Chama um algoritimo de redução de ruidos
+                        microfone.adjust_for_ambient_noise(source)
+                        self.falar("Deseja pesquisar o que ?")
+                        #Armazena o comando em variavel
+                        audio = microfone.listen(source)
+                    #passa o comando para o algoritimo interpretar
                     frase = microfone.recognize_google(audio,language = "pt-BR")
-                    
-                    if "Valorant" in frase :
+                    py.write(f"{frase}")
+                    py.press('enter')
+            elif "Gamer" in frase :
+                #Habilita o microfone
+                microfone = sr.Recognizer()
+                #Usando o microfone
+                with sr.Microphone() as source:
+                    #Chama um algoritimo de redução de ruidos
+                    microfone.adjust_for_ambient_noise(source)
+                    self.falar("Qual jogo deseja jogar")
+                    #Armazena o comando em variavel
+                    audio = microfone.listen(source)
+                #passa o comando para o algoritimo interpretar
+                frase = microfone.recognize_google(audio,language = "pt-BR")
+                
+                if "valorant" in frase :
                         py.press("win")
                         py.write("valorant")
                         py.press("enter")
-                    elif"Cs" in frase:
+                elif"Cs" in frase:
                         pass
-                    elif "Gta" in frase:
-                            try:
-                                # Caminho da pasta e do aplicativo
-                                caminho_pasta = r'C:\Users\Home\Desktop\DIO'
-                                caminho_aplicativo = os.path.join(caminho_pasta, 'Cherax.exe')
+                elif "GTA" in frase:
+                        try:
+                            # Caminho da pasta e do aplicativo
+                            caminho_pasta = r'C:\Users\Home\Desktop\DIO'
+                            caminho_aplicativo = os.path.join(caminho_pasta, 'Cherax.exe')
                                 
-                                # Abre a pasta (Opcional)
-                                os.startfile(caminho_pasta)
-                                time.sleep(2)  # Espera a pasta abrir
+                            # Abre a pasta (Opcional)
+                            os.startfile(caminho_pasta)
+                            time.sleep(2)  # Espera a pasta abrir
 
-                               # Abre o aplicativo
-                                py.doubleClick(x=365 , y =596)
-                                time.sleep(1)
-                                #clica no botao login
-                                py.click(x=551,y=497)
-                                time.sleep(3)
-                                #leva o cursor e depois clica para iniciar
-                                py.click(x=220,y=358)
-                                py.doubleClick(x=220, y=358)
-                                time.sleep(3)
-                                # aceita o termo de segurança
-                                time.sleep(5)
-                                py.click(x=815, y=791)
-                                py.click(x=927 , y=346)
-                            except Exception as e:
-                                print(f"Erro ao abrir o aplicativo: {e}")
-                except sr.UnknownValueError:
-                    print("Não entendi mestre")
-                    return False
+                            # Abre o aplicativo
+                            py.doubleClick(x=365 , y =596)
+                            time.sleep(1)
+                            #clica no botao login
+                            py.click(x=551,y=497)
+                            time.sleep(3)
+                            #leva o cursor e depois clica para iniciar
+                            py.click(x=220,y=358)
+                            py.doubleClick(x=220, y=358)
+                            time.sleep(3)
+                            # aceita o termo de segurança
+                            time.sleep(5)
+                            py.click(x=815, y=791)
+                            py.click(x=927 , y=346)
+                        except Exception as e:
+                            self.falar(f"Erro ao abrir o aplicativo: {e}")
+                            print(f"Erro ao abrir o aplicativo: {e}")
+                            
             elif "PowerPoint" in frase:
                 os.system("start POWERPNT.exe")
                 self.falar("Abrindo o google,mais alguma coisa ?")
@@ -101,7 +130,7 @@ class Assistent:
                 os.system(f'start "" "C:\\Users\Home\\AppData\\Roaming\\Nelogica\\Profit\\profitchart.exe"')
                 self.falar("Abrindo o google,mais alguma coisa ?")
             
-            elif  "fechar" in frase:
+            elif  "encerrar" in frase:
                 os.system("exit")
                 self.falar("Encerrando o assistente. Até logo, mestre!")
                 return True
@@ -109,7 +138,6 @@ class Assistent:
         except sr.UnknownValueError:
             print("Não entendi mestre")
             return False
-
 
 if __name__ == "__main__":
     assistente = Assistent()
